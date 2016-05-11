@@ -1,0 +1,15 @@
+body {
+	background-color: lightblue;
+}
+
+.page_title {
+	text-align: center;
+}
+
+#login_container {
+	width: 50%;
+}
+
+#forgotPassword_container {
+	width: 50%;
+}

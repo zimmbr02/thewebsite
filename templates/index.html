@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+	<title>Duelist Tools</title>
+	<link rel="stylesheet" href="myStyle.css" type="text/css">
+	<style>
+		body {
+			background-color: lightblue;
+		}
+		.page_title {
+			text-align: center;
+		}
+		#login_container {
+			width: 50%;
+		}
+	</style>
+	<script>
+		logIn = function() {
+			checkbox = document.querySelector('#rememberCheckbox');
+			if (checkbox.checked) {
+				username = document.querySelector('#username');
+				password = document.querySelector('#password');
+				
+				localStorage.setItem("username",JSON.stringify(username.value));
+				localStorage.setItem("password",JSON.stringify(password.value));
+			}
+		}
+		
+		restoreLocalUserInfo = function() {
+			rememberedUsername = JSON.parse(localStorage.getItem("username"));
+			rememberedPassword = JSON.parse(localStorage.getItem("password"));
+			
+			username = document.querySelector('#username');
+			password = document.querySelector('#password');
+			
+			username.value = rememberedUsername;
+			password.value = rememberedPassword;
+		}
+		
+		window.onload = restoreLocalUserInfo;
+	</script>
+</head>
+
+<body>
+	<h3 class="page_title">Duelist Tools</h3>
+	<div class="container" id="login_container">
+		<form role="form">
+			<div class="form-group">
+				<label for="username">Username:</label>
+				<input type="text" class="form-control" id="username">
+			</div>
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" class="form-control" id="password">
+			</div>
+		</form>
+	<button type="button" class="btn btn-primary" onclick="logIn()">Log in</button>
+	<label class="checkbox-inline"><input type="checkbox" id="rememberCheckbox" value="">Remember me!</label>
+	<p><a href="forgotPassword.html">Forgot password?</a></p>
+	</div>
+</body>
+{% endblock %}
