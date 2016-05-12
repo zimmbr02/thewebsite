@@ -3,7 +3,7 @@
 {% block content %}
 <head>
 	<title>Duelist Tools</title>
-	<link rel="stylesheet" href="myStyle.css" type="text/css">
+	<!--<link rel="stylesheet" href="myStyle.css" type="text/css">-->
 	<style>
 		body {
 			background-color: lightblue;
@@ -17,13 +17,38 @@
 	</style>
 	<script>
 		logIn = function() {
-			checkbox = document.querySelector('#rememberCheckbox');
-			if (checkbox.checked) {
-				username = document.querySelector('#username');
-				password = document.querySelector('#password');
+			username = document.querySelector('#username').value;
+			password = document.querySelector('#password').value;
 				
-				localStorage.setItem("username",JSON.stringify(username.value));
-				localStorage.setItem("password",JSON.stringify(password.value));
+			var req = new XMLHttpRequest();
+			req.open("POST", "/login", true);
+			req.setRequestHeader("Content-type", "application/json");
+			var data = {sentUsername:username,sentPassword:password};
+			data.done = true;
+			req.send(JSON.stringify(data));
+			req.onreadystatechange = function() {
+				if (req.readyState == 4 && req.status == 200) {
+					confirmation = JSON.parse(req.responseText);
+					if (confirmation.tasklist[0] != true) {
+						p = document.createElement('p');
+						p.appendChild(document.createTextNode('Incorrect username or password'));
+						p.style.color = "red";
+						
+						container = document.querySelector('#login_container');
+						container.appendChild(p);
+					}
+					
+					else {
+						//checks to remember the username and password locally
+						checkbox = document.querySelector('#rememberCheckbox');
+						if (checkbox.checked) {	
+							localStorage.setItem("username",JSON.stringify(username));
+							localStorage.setItem("password",JSON.stringify(password));
+						}
+						
+						window.location = "home.html";
+					}
+				}
 			}
 		}
 		
@@ -56,6 +81,7 @@
 			</div>
 		</form>
 	<button type="button" class="btn btn-primary" onclick="logIn()">Log in</button>
+	<button type="button" class="btn btn-default" onclick="location.href='sign-up.html';">Sign-up</button>
 	<label class="checkbox-inline"><input type="checkbox" id="rememberCheckbox" value="">Remember me!</label>
 	<p><a href="forgotPassword.html">Forgot password?</a></p>
 	</div>

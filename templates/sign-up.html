@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+	<title>Sign-up!</title>
+	<style>
+		body {
+			background-color: lightblue;
+		}
+		.page_title {
+			text-align: center;
+		}
+		#sign-up_container {
+			width: 50%;
+		}
+	</style>
+	<script>
+		showPassword = function() {
+			if (document.querySelector('#showPassword').checked) {
+				document.querySelector('#password').type = "text";
+				document.querySelector('#confirmPassword').type = "text";
+			}
+			else {
+				document.querySelector('#password').type = "password";
+				document.querySelector('#confirmPassword').type = "password";
+			}
+		}
+		
+		showAnswer = function() {
+			if (document.querySelector('#showAnswer').checked) {
+				document.querySelector('#answer').type = "text";
+			}
+			else {
+				document.querySelector('#answer').type = "password";
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<h3 class="page_title">Sign-up!</h3>
+	<div class="container" id="sign-up_container">
+		<form role="form">
+			<div class="form-group">
+				<label for="username">New Username:</label>
+				<input type="text" class="form-control" id="username">
+			</div>
+			<div class="form-group">
+				<label for="password">New Password:</label>
+				<input type="password" class="form-control" id="password">
+			</div>
+			<div class="form-group">
+				<label for="password">Confirm Password:</label>
+				<input type="password" class="form-control" id="confirmPassword">
+			</div>
+			<div class="form-group">
+				<label for="sel1">Security Question:</label>
+				<select class="form-control" id="sel1">
+					<option value="1">What is the name of your first pet?</option>
+					<option value="2">What is your favorite color?</option>
+					<option value="3">What is your mother's maiden name?</option>
+					<option value="4">What is the name of your 3rd grade teacher?</option>
+					<option value="5">What is the name of the street you lived on in grade school?</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="password">Answer:</label>
+				<input type="password" class="form-control" id="answer">
+			</div>
+		</form>
+	<button type="button" class="btn btn-primary">Create Account</button>
+	<label class="checkbox-inline"><input type="checkbox" value="" onclick="showPassword()" id="showPassword">Show Password</label>
+	<label class="checkbox-inline"><input type="checkbox" value="" onclick="showAnswer()" id="showAnswer">Show Answer</label>
+	</div>
+</body>
+{% endblock %}
