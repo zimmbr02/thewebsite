@@ -3,38 +3,8 @@
 {% block content %}
 <head>
 	<title>Sign-up!</title>
-	<style>
-		body {
-			background-color: lightblue;
-		}
-		.page_title {
-			text-align: center;
-		}
-		#sign-up_container {
-			width: 50%;
-		}
-	</style>
-	<script>
-		showPassword = function() {
-			if (document.querySelector('#showPassword').checked) {
-				document.querySelector('#password').type = "text";
-				document.querySelector('#confirmPassword').type = "text";
-			}
-			else {
-				document.querySelector('#password').type = "password";
-				document.querySelector('#confirmPassword').type = "password";
-			}
-		}
-		
-		showAnswer = function() {
-			if (document.querySelector('#showAnswer').checked) {
-				document.querySelector('#answer').type = "text";
-			}
-			else {
-				document.querySelector('#answer').type = "password";
-			}
-		}
-	</script>
+	<link rel="stylesheet" href="static/myStyle.css" type="text/css">
+	<script src="static/myScript.js"></script>
 </head>
 
 <body>

@@ -40,15 +40,20 @@ app.debug = True
 
 Bootstrap(app)
 
-#renders index.html
-@app.route('/')
-def index():
-    return render_template('index.html',foo='bar')
-
 #renders forgotPassword.html
 @app.route('/forgotPassword.html')
 def forgotPassword():
 	return render_template('forgotPassword.html',foo='bar')
+	
+#renders home.html
+@app.route('/home.html')
+def home():
+    return render_template('home.html',foo='bar')
+	
+#renders index.html
+@app.route('/')
+def index():
+    return render_template('index.html',foo='bar')
 	
 #renders sign-up.html
 @app.route('/sign-up.html')

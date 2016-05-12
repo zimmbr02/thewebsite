@@ -6,11 +6,15 @@ body {
 	text-align: center;
 }
 
-#login_container {
+#forgotPassword_container {
 	width: 50%;
 }
 
-#forgotPassword_container {
+#home_container {
+	width: 50%;
+}
+
+#login_container {
 	width: 50%;
 }
 
