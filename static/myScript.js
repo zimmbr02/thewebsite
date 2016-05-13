@@ -161,6 +161,18 @@ logIn = function() {
 	}
 }
 
+logInRedirector = function() {
+	logButton = document.querySelector('#logButton');
+	
+	if (logButton.text == " Log-in") {
+		window.location = "log-in.html";
+	}
+	
+	else {
+		window.location = "/";
+	}
+}
+
 passwordMatch = function() {
 	passwordOne = document.querySelector('#password').value;
 	passwordTwo = document.querySelector('#confirmPassword').value;

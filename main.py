@@ -59,27 +59,27 @@ def checkUsernameAvailability():
 #renders forgotPassword.html
 @app.route('/forgotPassword.html')
 def forgotPassword():
-	return render_template('forgotPassword.html',foo='bar')
+	return render_template('forgotPassword.html')
 	
 #renders home.html
 @app.route('/home.html')
 def home():
-    return render_template('home.html',foo='bar')
+    return render_template('home.html', user="Sign-Up", log="Log-in")
 	
 #renders index.html
 @app.route('/')
 def index():
-    return render_template('index.html',foo='bar')
+    return render_template('index.html')
     
 #renders log-in.html
 @app.route('/log-in.html')
 def logIn():
-    return render_template('log-in.html',foo='bar')
+    return render_template('log-in.html')
 	
 #renders sign-up.html
 @app.route('/sign-up.html')
 def signUp():
-	return render_template('sign-up.html',foo='bar')
+	return render_template('sign-up.html')
 	
 @app.route('/sign-up', methods=['POST'])
 def sign_up():
