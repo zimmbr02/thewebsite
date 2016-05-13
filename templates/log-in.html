@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+	<title>Duelist Tools</title>
+	<link rel="stylesheet" href="static/myStyle.css" type="text/css">
+	<script src="static/myScript.js"></script>
+	<script>
+		window.onload = restoreLocalUserInfo;
+	</script>
+</head>
+
+<body>
+	<h3 class="page_title">Duelist Tools</h3>
+	<div class="container" id="login_container">
+		<form role="form">
+			<div class="form-group">
+				<label for="username">Username:</label>
+				<input type="text" class="form-control" id="username">
+			</div>
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" class="form-control" id="password">
+			</div>
+		</form>
+	<button type="button" class="btn btn-primary" onclick="logIn()">Log in</button>
+	<button type="button" class="btn btn-default" onclick="location.href='sign-up.html';">Sign-up</button>
+	<label class="checkbox-inline"><input type="checkbox" id="rememberCheckbox" value="">Remember me!</label>
+	<p><a href="forgotPassword.html">Forgot password?</a></p>
+	<p class="incorrect"></p>
+	</div>
+</body>
+{% endblock %}

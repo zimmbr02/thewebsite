@@ -40,6 +40,22 @@ app.debug = True
 
 Bootstrap(app)
 
+#checks username availability as the user is typing
+@app.route('/checkUsernameAvailability', methods=['POST'])
+def checkUsernameAvailability():
+	theDict = json.loads(request.data.decode("utf8"))
+	sentUsername = theDict['sentUsername']
+	
+	allUsers = []
+	match = False
+	for item in session.query(Users).all():
+		allUsers.append(item.username)
+		
+	if sentUsername in allUsers:
+		match = True
+		
+	return jsonify(tasklist = [match])
+
 #renders forgotPassword.html
 @app.route('/forgotPassword.html')
 def forgotPassword():
@@ -54,11 +70,47 @@ def home():
 @app.route('/')
 def index():
     return render_template('index.html',foo='bar')
+    
+#renders log-in.html
+@app.route('/log-in.html')
+def logIn():
+    return render_template('log-in.html',foo='bar')
 	
 #renders sign-up.html
 @app.route('/sign-up.html')
 def signUp():
 	return render_template('sign-up.html',foo='bar')
+	
+@app.route('/sign-up', methods=['POST'])
+def sign_up():
+	theDict = json.loads(request.data.decode("utf8"))
+	sentUsername = theDict['sentUsername']
+	sentPassword = theDict['sentPassword']
+	sentQuestion = theDict['sentQuestion']
+	sentAnswer = theDict['sentAnswer']
+	
+	allIDs = []
+	match = False
+	for item in session.query(Users).all():
+		allIDs.append(item.id)
+	
+	potentialIDs = []
+	for lv in range(100000):
+		potentialIDs.append(lv)
+		
+	availableIDs = set(potentialIDs) - set(allIDs)
+	
+	print(allIDs)
+	
+	if len(availableIDs) > 0:
+		match = True
+		newID = availableIDs.pop()
+	
+		task = Users(id=newID,username=sentUsername,password=sentPassword,question=sentQuestion,answer=sentAnswer)
+		session.add(task)
+		session.commit()
+	
+	return jsonify(tasklist = [match])
 	
 #receives a username and passwords and checks the database
 @app.route('/login', methods=['POST'])
