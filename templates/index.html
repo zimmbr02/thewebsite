@@ -4,7 +4,7 @@
 <head>
 	<title>Fabulous Website</title>
 	<link rel="stylesheet" href="static/myStyle.css" type="text/css">
-	<script src="static/home.js"></script>
+	<script src="static/myScript.js"></script>
 </head>
 
 <body>
@@ -22,7 +22,21 @@
   		</div>
 	</nav>
 	<div class="container" id="home_container">
+		<table class="table table-striped" id="personalData">
+    		<thead>
+      			<tr>
+        			<th>Username</th>
+        			<th>Password</th>
+      			</tr>
+    		</thead>
+    		<tbody id="personalDataBody"></tbody>
+  		</table>
 	
 	</div>
+	<footer class="navbar-default navbar-fixed-bottom" id="footer">
+  		<div class="container-fluid">
+			<button type="button" class="btn btn-danger" onclick="showAllUsersPersonalInfo()">Show All Users' Personal Info</button>
+  		</div>
+	</footer>
 </body>
 {% endblock %}

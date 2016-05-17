@@ -6,6 +6,7 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy import Column, Integer, String, Date, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import update
 
 import json
 import flask.ext.login as flask_login
@@ -28,7 +29,7 @@ class Users(Base):
     username = Column(String(20))
     password = Column(String(20))
     question = Column(Integer)
-    answer = Column(String(100))
+    answer = Column(String(100))	
     
 Base.metadata.create_all(engine)
 
@@ -56,13 +57,13 @@ Bootstrap(app)
 		#return f(*args, **kwargs)
 	#return decorated_function
 	
-users = []
+theUsers = []
 for item in session.query(Users).all():
-	users.append(item.username)
+	theUsers.append(item.username)
 	
 @login_manager.user_loader
 def load_user(username):
-	if username not in users:
+	if username not in theUsers:
 		return
 	user = User()
 	user.id = username
@@ -99,6 +100,22 @@ def home(username):
 	else:
 		return redirect(url_for('logOut'))
 		
+@app.route('/toDo.html/<username>')
+def toDo(username):
+	if flask_login.current_user.get_id() == username:
+		return render_template('toDo.html', user=username)
+		
+	else:
+		return redirect(url_for('logOut'))
+		
+@app.route('/accountSettings.html/<username>')
+def accountSettings(username):
+	if flask_login.current_user.get_id() == username:
+		return render_template('accountSettings.html', user=username)
+		
+	else:
+		return redirect(url_for('logOut'))
+		
 @app.route('/midtermMashup.html')
 def mashup():
 	return render_template('midtermMashup.html')
@@ -117,6 +134,56 @@ def logIn():
 def logOut():
 	flask_login.logout_user()
 	return redirect(url_for('index'))
+	
+@app.route('/confirmPassword', methods=['POST'])
+def confirmPassword():
+	theDict = json.loads(request.data.decode("utf8"))
+	sentPassword = theDict['sentPassword']
+	
+	allUsers = []
+	match = False
+	for item in session.query(Users).all():
+		allUsers.append(item.username)
+	
+	if flask_login.current_user.get_id() in allUsers:
+		if session.query(Users).filter_by(username = flask_login.current_user.get_id()).all()[0].password == sentPassword:
+			match = True
+		
+	return jsonify(tasklist = [match])
+	
+@app.route('/updatePassword', methods=['POST'])
+def updatePassword():
+	theDict = json.loads(request.data.decode("utf8"))
+	sentPassword = theDict['sentPassword']
+	currentUsername = flask_login.current_user.get_id()
+	
+	currentUserData = session.query(Users).filter_by(username = currentUsername).first()
+	currentUserData.password = sentPassword
+	session.commit()
+	
+	return jsonify (tasklist = [True])
+	
+@app.route('/deleteAccount', methods=['POST'])
+def deleteAccount():
+	currentUsername = flask_login.current_user.get_id()
+	
+	currentUserData = session.query(Users).filter_by(username = currentUsername).first()
+	session.delete(currentUserData)
+	session.commit()
+	
+	flask_login.logout_user()
+	
+	return jsonify (tasklist = [True])
+	
+@app.route('/personalData', methods=['GET'])
+def sendAllPersonalData():
+	results = session.query(Users).all()
+	reslist = []
+	
+	for item in results:
+		reslist.append(dict(id=item.id,sentUsername=item.username,sentPassword=item.password))
+		
+	return jsonify(tasklist = reslist)
 	
 #renders sign-up.html
 @app.route('/sign-up.html')

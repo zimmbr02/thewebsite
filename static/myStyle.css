@@ -7,6 +7,13 @@ body {
 	text-align: center;
 }
 
+#accountSettings {
+	padding: 30px;
+}
+#footer {
+	background-color: rgb(178, 208, 255);
+}
+
 #forgotPassword_container {
 	width: 50%;
 }
@@ -21,6 +28,11 @@ body {
 
 #login_container {
 	width: 50%;
+}
+
+#personalData {
+	overflow: scroll;
+	display: none;
 }
 
 #sign-up_container {
