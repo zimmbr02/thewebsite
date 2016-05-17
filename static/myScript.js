@@ -374,7 +374,7 @@ showChangePasswordInput = function() {
 	
 	//settings.innerHTML = "";
 	
-	if (! showChangePassword) {
+	if (! showChangePassword && ! showDeleteAccount) {
 	
 		form = document.createElement('form');
 		form.role = "form";
@@ -414,7 +414,7 @@ showDeleteAccountInput = function() {
 	
 	//settings.innerHTML = "";
 	
-	if (! showDeleteAccount) {
+	if (! showDeleteAccount && ! showChangePassword) {
 	
 		form = document.createElement('form');
 		form.role = "form";

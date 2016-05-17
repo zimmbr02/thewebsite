@@ -218,6 +218,7 @@ def sign_up():
 		
 		user = User()
 		user.id = sentUsername
+		theUsers.append(sentUsername)
 		flask_login.login_user(user)
 	
 	return jsonify(tasklist = [match])
