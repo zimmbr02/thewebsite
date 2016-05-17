@@ -40,14 +40,8 @@ createAccount = function() {
 			if (req.readyState == 4 && req.status == 200) {
 				var confirmation = JSON.parse(req.responseText);
 				if (confirmation.tasklist[0] == true) {
-					/*body = document.body;
-					title = document.getElement
-					h3 = document.createElement('h3');
-					h3.style.color = "green";
-					h3.appendChild(document.createTextNode('Account Created! Redirecting to log-in page in 5 seconds'));
-					body.innerHTML = "";
-					body.appendChild(h3);*/
-					window.location = "home.html";
+					alert("Account Created");
+					window.location = "home.html/" + username;
 				}
 				
 				else {
@@ -155,7 +149,7 @@ logIn = function() {
 					localStorage.setItem("password",JSON.stringify(password));
 				}
 						
-				window.location = "home.html";
+				window.location = "home.html/" + username;
 			}
 		}
 	}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<html lang="en">
+	<head>
+	    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+		<title>Midterm Mashup</title>
+		<link rel="stylesheet" href="/static/midtermMashup.css" type="text/css">
+    	<link rel="icon" type="image/png" href="http://i.gyazo.com/67ea939aad48114dd076a2564efbd933.png">
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmKjJTmRdbqc1qzeJXmWwHtqn-DTA9-nI"></script>
+		<script src="/static/midtermMashup.js"></script>
+		<script type="text/javascript" src="http://www.bing.com/mapspreview/sdk/mapcontrol?branch=experimental&callback=getMap"></script>
+	</head>
+	<body>
+		<section id="Instructions">
+			<h3>Google Map View to Bing Map View</h3>
+			<h3><span class="rainbow">Dazzle</span> Your Friends and Family!</h3>
+		</section>
+		<div id="GoogleMap"></div>
+		<div id="Inbetween"></div>
+		<div id="BingMap"></div>
+	</body>
+</html>
+{% endblock %}

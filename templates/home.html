@@ -2,8 +2,13 @@
 
 {% block content %}
 <head>
-	<title>Duelist Tools Home</title>
-	<link rel="stylesheet" href="static/myStyle.css" type="text/css">
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+	<link rel="stylesheet" href="/static/midtermMashup.css" type="text/css">
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmKjJTmRdbqc1qzeJXmWwHtqn-DTA9-nI"></script>
+	<script src="/static/midtermMashup.js"></script>
+	<script type="text/javascript" src="http://www.bing.com/mapspreview/sdk/mapcontrol?branch=experimental&callback=getMap"></script>
+	<title>Fabulous Website</title>
+	<link rel="stylesheet" href="/static/myStyle.css" type="text/css">
 	<script src="static/myScript.js"></script>
 </head>
 
@@ -11,20 +16,26 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
   		<div class="container-fluid">
     		<div class="navbar-header">
-      			<a class="navbar-brand">Duelist Tools</a>
+      			<a class="navbar-brand">Fabulous Website</a>
     		</div>
     		<ul class="nav navbar-nav">
-      			<li class="active"><a href="home.html">Home</a></li>
-      			<li><a href="">Deckbuilder</a></li>
+      			<li class="active"><a>Mashup</a></li>
     		</ul>
     		<ul class="nav navbar-nav navbar-right">
-      			<li><a href=""><span class="glyphicon glyphicon-user"></span> {{ user }}</a></li>
-      			<li><a onclick="logInRedirector()" id="logButton"><span class="glyphicon glyphicon-log-in"></span> {{ log }}</a></li>
+      			<li><a><span class="glyphicon glyphicon-user"></span> {{ user }}</a></li>
+      			<!--<li><a onclick="logInRedirector()" id="logButton"><span class="glyphicon glyphicon-log-in"></span> {{ log }}</a></li>-->
+				<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log-out</a></li>
     		</ul>
   		</div>
 	</nav>
-	<div class="container" id="home_container">
-	
+	<!--<div class="container" id="home_container">	</div>-->
+	<div class="container" id="Instructions">
+		<h3>Google Map View to Bing Map View</h3>
+		<h3><span class="rainbow">Dazzle</span> Your Friends and Family!</h3>
 	</div>
+	<div class="container" id="GoogleMap"></div>
+	<div class="container" id="Inbetween"></div>
+	<div class="container" id="BingMap"></div>
+
 </body>
 {% endblock %}
